@@ -1,15 +1,16 @@
 package com.shepherdjerred.bubblepop;
 
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 
 import java.util.Random;
 
 public class Ball {
 
-    private final int RADIUS = 100;
-    private final double RADIUS_SQUARED = Math.pow(RADIUS, 2);
-    private final int BALL_COLOR = 0xffaaaaff;
+    private int radius;
+    private double radiusSquared;
+    private int ballColor;
     private Paint mPaint;
     private int mX;
     private int mY;
@@ -19,14 +20,18 @@ public class Ball {
     private int mBottomWall;
 
     public Ball(int rightWall, int bottomWall) {
+        Random random = new Random();
+        radius = random.nextInt(200 + 1 - 100) + 100;
+        radiusSquared =  Math.pow(radius, 2);
         mRightWall = rightWall;
         mBottomWall = bottomWall;
-        mX = new Random().nextInt(100 + 1);
-        mY = new Random().nextInt(100 + 1);
-        mVelocityX = new Random().nextInt(15 + 1 - 5) + 5;
-        mVelocityY = new Random().nextInt(15 + 1 - 5) + 5;
+        mX = random.nextInt(100 + 1);
+        mY = random.nextInt(100 + 1);
+        mVelocityX = random.nextInt(20 + 1 - 5) + 5;
+        mVelocityY = random.nextInt(20 + 1 - 5) + 5;
+        ballColor = Color.argb(255, random.nextInt(256), random.nextInt(256), random.nextInt(256));
         mPaint = new Paint();
-        mPaint.setColor(BALL_COLOR);
+        mPaint.setColor(ballColor);
     }
 
     public void move() {
@@ -36,30 +41,30 @@ public class Ball {
         mY += mVelocityY;
 
         // Check for top and bottom wall collisions
-        if (mY > mBottomWall - RADIUS) {
-            mY = mBottomWall - RADIUS;
+        if (mY > mBottomWall - radius) {
+            mY = mBottomWall - radius;
             mVelocityY *= -1;
-        } else if (mY < RADIUS) {
-            mY = RADIUS;
+        } else if (mY < radius) {
+            mY = radius;
             mVelocityY *= -1;
         }
 
         // Check for right and left wall collisions
-        if (mX > mRightWall - RADIUS) {
-            mX = mRightWall - RADIUS;
+        if (mX > mRightWall - radius) {
+            mX = mRightWall - radius;
             mVelocityX *= -1;
-        } else if (mX < RADIUS) {
-            mX = RADIUS;
+        } else if (mX < radius) {
+            mX = radius;
             mVelocityX *= -1;
         }
     }
 
     public void draw(Canvas canvas) {
-        canvas.drawCircle(mX, mY, RADIUS, mPaint);
+        canvas.drawCircle(mX, mY, radius, mPaint);
     }
 
     public boolean ballTouch(int x, int y) {
         double distance = Math.pow(x - mX, 2) + Math.pow(y - mY, 2);
-        return distance <= RADIUS_SQUARED;
+        return distance <= radiusSquared;
     }
 }
