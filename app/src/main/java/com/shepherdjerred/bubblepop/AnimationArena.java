@@ -13,17 +13,17 @@ public class AnimationArena {
     private final List<Ball> mBallList;
     private int mWidth;
     private int mHeight;
-    private int score;
-    private Paint scorePaint;
+    private int mScore;
+    private Paint mScorePaint;
 
     public AnimationArena(int arenaWidth, int arenaHeight) {
         mWidth = arenaWidth;
         mHeight = arenaHeight;
         mBallList = new ArrayList<>();
 
-        scorePaint = new Paint();
-        scorePaint.setColor(Color.BLACK);
-        scorePaint.setTextSize(50);
+        mScorePaint = new Paint();
+        mScorePaint.setColor(Color.BLACK);
+        mScorePaint.setTextSize(50);
 
         init();
     }
@@ -32,7 +32,7 @@ public class AnimationArena {
         for (int c = 0; c < 5; c++) {
             mBallList.add(new Ball(mWidth, mHeight));
         }
-        score = 0;
+        mScore = 0;
     }
 
     public void update() {
@@ -46,7 +46,7 @@ public class AnimationArena {
     public void draw(Canvas canvas) {
         // Wipe canvas clean
         canvas.drawRGB(255, 255, 255);
-        canvas.drawText("Score: " + score, 10, 50, scorePaint);
+        canvas.drawText("Score: " + mScore, 10, 50, mScorePaint);
 
         synchronized (mBallList) {
             for (Ball ball : mBallList) {
@@ -82,9 +82,9 @@ public class AnimationArena {
         }
 
         if (!pop) {
-            score -= 2;
+            mScore -= 2;
         } else {
-            score++;
+            mScore++;
         }
     }
 }

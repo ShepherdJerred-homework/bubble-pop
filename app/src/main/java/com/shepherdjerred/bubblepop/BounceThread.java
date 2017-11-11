@@ -7,10 +7,10 @@ public class BounceThread extends Thread {
 
     private SurfaceHolder mSurfaceHolder;
     private AnimationArena mAnimationArena;
-    private boolean isRunning;
+    private boolean mIsRunning;
 
     public BounceThread(SurfaceHolder sh) {
-        isRunning = true;
+        mIsRunning = true;
         mSurfaceHolder = sh;
         Canvas canvas = mSurfaceHolder.lockCanvas();
         mAnimationArena = new AnimationArena(canvas.getWidth(), canvas.getHeight());
@@ -19,7 +19,7 @@ public class BounceThread extends Thread {
 
     public void run() {
         try {
-            while (isRunning) {
+            while (mIsRunning) {
                 Canvas canvas = mSurfaceHolder.lockCanvas();
                 mAnimationArena.update();
                 mAnimationArena.draw(canvas);
@@ -36,6 +36,6 @@ public class BounceThread extends Thread {
     }
 
     public void endBounce() {
-        isRunning = false;
+        mIsRunning = false;
     }
 }
