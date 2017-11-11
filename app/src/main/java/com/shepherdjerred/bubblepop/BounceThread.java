@@ -1,4 +1,4 @@
-package com.zybooks.bouncingball;
+package com.shepherdjerred.bubblepop;
 
 import android.graphics.Canvas;
 import android.view.SurfaceHolder;

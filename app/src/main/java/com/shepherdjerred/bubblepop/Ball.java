@@ -1,7 +1,9 @@
-package com.zybooks.bouncingball;
+package com.shepherdjerred.bubblepop;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
+
+import java.util.Random;
 
 public class Ball {
 
@@ -18,10 +20,10 @@ public class Ball {
     public Ball(int rightWall, int bottomWall) {
         mRightWall = rightWall;
         mBottomWall = bottomWall;
-        mX = 100;
-        mY = 100;
-        mVelocityX = 10;
-        mVelocityY = 10;
+        mX = new Random().nextInt(100 + 1);
+        mY = new Random().nextInt(100 + 1);
+        mVelocityX = new Random().nextInt(15 + 1 - 5) + 5;
+        mVelocityY = new Random().nextInt(15 + 1 - 5) + 5;
         mPaint = new Paint();
         mPaint.setColor(BALL_COLOR);
     }
@@ -36,8 +38,7 @@ public class Ball {
         if (mY > mBottomWall - RADIUS) {
             mY = mBottomWall - RADIUS;
             mVelocityY *= -1;
-        }
-        else if (mY < RADIUS) {
+        } else if (mY < RADIUS) {
             mY = RADIUS;
             mVelocityY *= -1;
         }
@@ -46,8 +47,7 @@ public class Ball {
         if (mX > mRightWall - RADIUS) {
             mX = mRightWall - RADIUS;
             mVelocityX *= -1;
-        }
-        else if (mX < RADIUS) {
+        } else if (mX < RADIUS) {
             mX = RADIUS;
             mVelocityX *= -1;
         }
@@ -55,5 +55,9 @@ public class Ball {
 
     public void draw(Canvas canvas) {
         canvas.drawCircle(mX, mY, RADIUS, mPaint);
+    }
+
+    public boolean ballTouch(int x, int y) {
+        return true;
     }
 }

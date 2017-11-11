@@ -1,7 +1,7 @@
-package com.zybooks.bouncingball;
+package com.shepherdjerred.bubblepop;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.FrameLayout;
 
 public class MainActivity extends AppCompatActivity {
@@ -11,7 +11,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        FrameLayout frameLayout = (FrameLayout) findViewById(R.id.frameLayout);
+        FrameLayout frameLayout = findViewById(R.id.frameLayout);
 
         BounceSurfaceView bounceSurfaceView = new BounceSurfaceView(this, null);
         frameLayout.addView(bounceSurfaceView);

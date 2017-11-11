@@ -1,4 +1,4 @@
-package com.zybooks.bouncingball;
+package com.shepherdjerred.bubblepop;
 
 import android.content.Context;
 import android.util.AttributeSet;
