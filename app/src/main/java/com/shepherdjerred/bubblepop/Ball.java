@@ -8,6 +8,7 @@ import java.util.Random;
 public class Ball {
 
     private final int RADIUS = 100;
+    private final double RADIUS_SQUARED = Math.pow(RADIUS, 2);
     private final int BALL_COLOR = 0xffaaaaff;
     private Paint mPaint;
     private int mX;
@@ -58,6 +59,7 @@ public class Ball {
     }
 
     public boolean ballTouch(int x, int y) {
-        return true;
+        double distance = Math.pow(x - mX, 2) + Math.pow(y - mY, 2);
+        return distance <= RADIUS_SQUARED;
     }
 }

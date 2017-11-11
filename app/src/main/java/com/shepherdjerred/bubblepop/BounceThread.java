@@ -31,6 +31,10 @@ public class BounceThread extends Thread {
         }
     }
 
+    public void onTouchEvent(int x, int y) {
+        mAnimationArena.tap(x, y);
+    }
+
     public void endBounce() {
         isRunning = false;
     }
