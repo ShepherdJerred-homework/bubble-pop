@@ -15,6 +15,7 @@ public class AnimationArena {
     private int mHeight;
     private int mScore;
     private Paint mScorePaint;
+    private Paint mGameOverPaint;
 
     public AnimationArena(int arenaWidth, int arenaHeight) {
         mWidth = arenaWidth;
@@ -24,6 +25,10 @@ public class AnimationArena {
         mScorePaint = new Paint();
         mScorePaint.setColor(Color.BLACK);
         mScorePaint.setTextSize(50);
+
+        mGameOverPaint = new Paint();
+        mGameOverPaint.setColor(Color.RED);
+        mGameOverPaint.setTextSize(100);
 
         init();
     }
@@ -46,9 +51,12 @@ public class AnimationArena {
     public void draw(Canvas canvas) {
         // Wipe canvas clean
         canvas.drawRGB(255, 255, 255);
-        canvas.drawText("Score: " + mScore, 10, 50, mScorePaint);
 
         synchronized (mBallList) {
+            if (mBallList.size() == 0) {
+                canvas.drawText("Game Over", (canvas.getWidth()  / 2) - (mGameOverPaint.measureText("Game Over") / 2) , canvas.getHeight() / 2, mGameOverPaint);
+            }
+            canvas.drawText("Score: " + mScore, 10, 50, mScorePaint);
             for (Ball ball : mBallList) {
                 ball.draw(canvas);
             }
